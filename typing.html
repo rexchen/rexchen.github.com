@@ -3,28 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>English-Chinese Typing Game</title>
+    <meta name="description" content="An English-Chinese typing game with 500 common elementary school nouns" />
+    <title>English-Chinese Typing Game: 500 Words Edition</title>
     <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
       body {
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin: 0;
+        min-height: 100vh;
         background-color: #f0f0f0;
+        padding: 20px;
       }
       #game-container {
         text-align: center;
         background-color: white;
-        padding: 30px;
+        padding: 20px;
         border-radius: 15px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
+        max-width: 600px;
         width: 100%;
       }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
       #word-display {
-        font-size: 48px;
+        font-size: 36px;
         font-weight: bold;
         margin: 20px 0 10px;
         color: #333;
@@ -35,9 +45,10 @@
         margin-bottom: 20px;
       }
       #image-display {
-        width: 400px;
-        height: 400px;
-        margin: 0 auto 30px;
+        width: 100%;
+        height: 0;
+        padding-bottom: 75%; /* 4:3 aspect ratio */
+        margin: 0 auto 20px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -45,23 +56,24 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
       #input-field {
-        font-size: 24px;
+        font-size: 18px;
         padding: 10px;
-        width: 300px;
+        width: 100%;
+        max-width: 300px;
         margin-top: 20px;
         border: 2px solid #ddd;
         border-radius: 5px;
       }
       #score,
       #time {
-        font-size: 24px;
-        margin-top: 20px;
+        font-size: 18px;
+        margin-top: 15px;
         color: #666;
       }
       #start-btn {
-        font-size: 24px;
-        margin-top: 30px;
-        padding: 15px 30px;
+        font-size: 18px;
+        margin-top: 20px;
+        padding: 10px 20px;
         background-color: #4caf50;
         color: white;
         border: none;
@@ -72,11 +84,32 @@
       #start-btn:hover {
         background-color: #45a049;
       }
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 20px;
+        }
+        #word-display {
+          font-size: 28px;
+        }
+        #chinese-translation {
+          font-size: 20px;
+        }
+        #input-field {
+          font-size: 16px;
+        }
+        #score,
+        #time {
+          font-size: 16px;
+        }
+        #start-btn {
+          font-size: 16px;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="game-container">
-      <h1>English-Chinese Typing Game</h1>
+      <h1>English-Chinese Typing Game: 500 Words Edition</h1>
       <div id="image-display"></div>
       <div id="word-display"></div>
       <div id="chinese-translation"></div>
@@ -87,6 +120,7 @@
     </div>
 
     <script>
+      // 這裡放入完整的 500 個單字列表
       const wordsWithTranslations = [
         { en: 'apple', zh: '蘋果' },
         { en: 'banana', zh: '香蕉' },
@@ -382,7 +416,7 @@
           return data.urls.regular;
         } catch (error) {
           console.error('Error fetching image:', error);
-          return `https://via.placeholder.com/400x400?text=${word}`;
+          return `https://via.placeholder.com/400x300?text=${word}`;
         }
       }
 
@@ -424,7 +458,7 @@
           imageDisplay.style.backgroundImage = `url('${imageUrl}')`;
         } catch (error) {
           console.error('Failed to set image:', error);
-          imageDisplay.style.backgroundImage = `url('https://via.placeholder.com/400x400?text=${currentWord.en}')`;
+          imageDisplay.style.backgroundImage = `url('https://via.placeholder.com/400x300?text=${currentWord.en}')`;
         }
       }
 
